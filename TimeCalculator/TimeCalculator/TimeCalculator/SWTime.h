@@ -10,20 +10,20 @@
 
 @interface SWTime : NSObject
 
-@property (nonatomic) int hour;
-@property (nonatomic) int min;
-@property (nonatomic) int sec;
+@property (nonatomic) NSInteger hour;
+@property (nonatomic) NSInteger min;
+@property (nonatomic) NSInteger sec;
 
-- (id)initWithHours: (int)hours andMinutes:(int)minutes;
-- (id) initWithHours:(int)hours andMinutes:(int)minutes andSeconds:(int)seconds;
+- (id)initWithHours: (NSInteger)hours andMinutes:(NSInteger)minutes;
+- (id) initWithHours:(NSInteger)hours andMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds;
 - (id)initUsingTotalTimeInMilliseconds: (long)totalMilliseconds;
-- (id)initUsingTotalTimeInSeconds: (int)totalSeconds;
+- (id)initUsingTotalTimeInSeconds: (NSInteger)totalSeconds;
 - (id)initWithString: (NSString*)aString;
 
 - (NSString*)toString;
-- (void)setWithTotalTimeInSeconds: (int)totalSeconds;
+- (void)setWithTotalTimeInSeconds: (NSInteger)totalSeconds;
 - (void)setWithTotalTimeInMilliseconds: (long)totalMilliseconds;
 - (void)clear;
-- (int)getTotalTimeInSeconds;
+- (NSInteger)getTotalTimeInSeconds;
 
 @end

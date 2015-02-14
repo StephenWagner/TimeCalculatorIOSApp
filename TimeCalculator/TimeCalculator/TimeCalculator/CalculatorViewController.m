@@ -7,18 +7,14 @@
 //
 
 #import "CalculatorViewController.h"
-#import "SWTime.h"
+#import "SharedCalculatorController.h"
 #import "TimeCalculator.h"
+#import "TimePassedViewController.h"
 
 @interface CalculatorViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *calculatorDisplay;
-@property (nonatomic) BOOL firstCAClick;
-@property (strong, nonatomic) SWTime *totalTime;
-@property (strong, nonatomic) TimeCalculator *calculator;
-@property (strong, nonatomic) SWTime *timeArgument, *timeArg2;
-@property (nonatomic) int operator; //1:plus, 2:minus, 3:multiply, 4:equals
-@property (strong, nonatomic) UIButton *buttonWithBorder;
+@property (strong, nonatomic) SharedCalculatorController *calcController;
 
 @end
 
@@ -29,9 +25,7 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
-    _firstCAClick = YES;
-    _calculator = [[TimeCalculator alloc]init];
-
+    _calcController = [[SharedCalculatorController alloc]initWithLabel:_calculatorDisplay];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,89 +34,46 @@
 }
 
 - (IBAction)appendDigit:(UIButton *)sender {
-    _firstCAClick = YES;
     
-    if ([_calculatorDisplay.text isEqualToString:[_totalTime toString]]) {
-        [self clearDisplay];
+    if ([_calculatorDisplay.text isEqualToString:[_calcController.totalTime toString]]) {
+        _calculatorDisplay.text = [_calcController clearDisplay];
     }
-    NSString *digit = sender.currentTitle;
-    NSMutableString *toDisplay = [[NSMutableString alloc]init];
 
-    [toDisplay appendString: [_calculatorDisplay.text stringByReplacingOccurrencesOfString:@":" withString:@""]];
-    [toDisplay appendString:digit];
-    
-    if ([toDisplay hasPrefix:@"0"]) {
-        [toDisplay setString:[toDisplay substringFromIndex:1]];
-    }
-    
-    _calculatorDisplay.text = [self formatDisplay:toDisplay];
-}
-
-- (IBAction)clear {
-    [self clearDisplay];
-    
-    if(_firstCAClick){
-        _firstCAClick = NO;
-    }else{
-        _totalTime = nil;
-        [[_buttonWithBorder layer]setBorderWidth:0.0f];
-        _buttonWithBorder = nil;
-        _firstCAClick = YES;
-    }
+    _calculatorDisplay.text = [_calcController appendDigit:sender];
 }
 
 - (IBAction)doMath:(UIButton *)sender {
+    _calculatorDisplay.text = [_calcController doMath:sender stringSWTime:_calculatorDisplay.text];
+}
 
-    _timeArgument = [[SWTime alloc]initWithString:_calculatorDisplay.text];
-    [[_buttonWithBorder layer]setBorderWidth:0.0f];
-    [[sender layer]setBorderWidth:1.5f];
-    _buttonWithBorder = sender;
+- (IBAction)clear {
+    _calculatorDisplay.text = [_calcController clear];
+}
 
-    if (!_totalTime) {
-        _totalTime = _timeArgument;
-    }else{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier  isEqual: @"segueToTimePassed"]) {
+        TimePassedViewController* timePassedVC = (TimePassedViewController*) segue.destinationViewController;
+        timePassedVC.calcController = _calcController;
+    }
+}
 
-        switch (_operator) {
-            case 1://plus
-                _totalTime = [_calculator addTime:_timeArgument andSecondTime:_totalTime];
-                break;
-            case 2://minus
-                _totalTime = [_calculator subtractTime:_timeArgument subtractFromThisBiggerNumber:_totalTime];
-                break;
-            case 3://multiply
+- (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue{
+    _calculatorDisplay.text = [_calcController.totalTime toString];
+    
+    if (_calcController.buttonWithBorder.tag > 7) {
+        UIButton *buttonToBorder;
+        
+        switch (_calcController.buttonWithBorder.tag) {
+            case 8:
+                buttonToBorder = _plusButton;
                 break;
             default:
+                buttonToBorder = _minusButton;
                 break;
         }
-
-    }
-    
-    [self setOperatorFromUIButton:sender];
-    _calculatorDisplay.text = [_totalTime toString];
-
-}
-
--(void)setOperatorFromUIButton:(UIButton *)sender{
-    //1:plus, 2:minus, 3:multiply, 4:equals
-    if ([sender.currentTitle isEqualToString:@"+"]) {
-        _operator = 1;
-    }else if ([sender.currentTitle isEqualToString:@"-"]){
-        _operator = 2;
-    }else if ([sender.currentTitle isEqualToString:@"x"]){
-        _operator = 3;
-    }else{
-        _operator = 4;
+        
+        [_calcController setButtonBorder:buttonToBorder];
     }
 }
 
-- (void)clearDisplay{
-    _calculatorDisplay.text = [self formatDisplay:@"000000"];
-}
-
-- (NSString*) formatDisplay: (NSString*)stringToFormat{
-    NSMutableString *formattedString = [NSMutableString stringWithString:stringToFormat];
-    [formattedString insertString:@":" atIndex: formattedString.length-2];
-    [formattedString insertString:@":" atIndex:formattedString.length-5];
-    return formattedString;
-}
 @end

@@ -18,11 +18,11 @@
     return [self initWithHours:0 andMinutes:0 andSeconds:0];
 }
 
-- (id)initWithHours: (int)hours andMinutes:(int)minutes{
+- (id)initWithHours: (NSInteger)hours andMinutes:(NSInteger)minutes{
     return [self initWithHours:hours andMinutes:minutes andSeconds:0];
 }
 
-- (id) initWithHours:(int)hours andMinutes:(int)minutes andSeconds:(int)seconds{
+- (id) initWithHours:(NSInteger)hours andMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds{
     self = [super init];
     self.hour = hours;
     self.min = minutes;
@@ -37,7 +37,7 @@
     return self;
 }
 
-- (id)initUsingTotalTimeInSeconds: (int)totalSeconds{
+- (id)initUsingTotalTimeInSeconds: (NSInteger)totalSeconds{
     self = [super init];
     [self setWithTotalTimeInSeconds:totalSeconds];
     return self;
@@ -69,8 +69,8 @@
 
 }
 
-- (void)setWithTotalTimeInSeconds: (int)totalSeconds{
-    int remainder;
+- (void)setWithTotalTimeInSeconds: (NSInteger)totalSeconds{
+    NSInteger remainder;
     self.hour = totalSeconds / 3600;
     remainder = totalSeconds % 3600;
     self.min = remainder / 60;
@@ -79,10 +79,10 @@
 }
 
 - (void)setWithTotalTimeInMilliseconds: (long)totalMilliseconds{
-    int totalSeconds;
+    NSInteger totalSeconds;
     
     totalMilliseconds = totalMilliseconds/1000;
-    totalSeconds = (int)totalMilliseconds;
+    totalSeconds = (NSInteger)totalMilliseconds;
     
     [self setWithTotalTimeInSeconds:(totalSeconds)];
 }
@@ -91,8 +91,8 @@
     self.hour = self.min = self.sec = 0;
 }
 
-- (int)getTotalTimeInSeconds{
-    int secMin, secHour, totalSeconds;
+- (NSInteger)getTotalTimeInSeconds{
+    NSInteger secMin, secHour, totalSeconds;
     
     secMin = self.min * 60;
     secHour = self.hour * 3600;

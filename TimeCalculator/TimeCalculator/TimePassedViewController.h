@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SharedCalculatorController.h"
 
 @interface TimePassedViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITextField *startTimeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *endTimeTextField;
+@property (weak, nonatomic) IBOutlet UILabel *timeElapsedLabel;
+@property (weak, nonatomic) SharedCalculatorController *calcController;
+@property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
 @end

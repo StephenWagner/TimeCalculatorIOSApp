@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CalculatorViewController : UIViewController
-
-- (IBAction)appendDigit:(UIButton *)sender;
-- (NSString*) formatDisplay: (NSString*)stringToFormat;
-- (IBAction)clear;
+@property (weak, nonatomic) IBOutlet UIButton *plusButton;
+@property (weak, nonatomic) IBOutlet UIButton *minusButton;
 
 @end
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC6FF1321A80B3C100223D36 /* TimePassedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6FF1301A80B3C100223D36 /* TimePassedViewController.m */; };
+		DC6FF1391A86105400223D36 /* SharedCalculatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6FF1381A86105400223D36 /* SharedCalculatorController.m */; };
 		DC7C4B1A1A7770FD000E81B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4B191A7770FD000E81B6 /* main.m */; };
 		DC7C4B1D1A7770FD000E81B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4B1C1A7770FD000E81B6 /* AppDelegate.m */; };
 		DC7C4B201A7770FD000E81B6 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4B1F1A7770FD000E81B6 /* CalculatorViewController.m */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		DC6FF12F1A80B3C100223D36 /* TimePassedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimePassedViewController.h; path = ../TimePassedViewController.h; sourceTree = "<group>"; };
 		DC6FF1301A80B3C100223D36 /* TimePassedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimePassedViewController.m; path = ../TimePassedViewController.m; sourceTree = "<group>"; };
+		DC6FF1371A86105400223D36 /* SharedCalculatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedCalculatorController.h; sourceTree = "<group>"; };
+		DC6FF1381A86105400223D36 /* SharedCalculatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedCalculatorController.m; sourceTree = "<group>"; };
 		DC7C4B141A7770FD000E81B6 /* TimeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7C4B181A7770FD000E81B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC7C4B191A7770FD000E81B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 		DC7C4B161A7770FD000E81B6 /* TimeCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				DC6FF1371A86105400223D36 /* SharedCalculatorController.h */,
+				DC6FF1381A86105400223D36 /* SharedCalculatorController.m */,
 				DC7C4B3E1A79F28F000E81B6 /* SWTime.h */,
 				DC7C4B3F1A79F28F000E81B6 /* SWTime.m */,
 				DC7C4B411A7B7BAF000E81B6 /* TimeCalculator.h */,
@@ -237,6 +242,7 @@
 				DC7C4B401A79F28F000E81B6 /* SWTime.m in Sources */,
 				DC7C4B201A7770FD000E81B6 /* CalculatorViewController.m in Sources */,
 				DC7C4B1D1A7770FD000E81B6 /* AppDelegate.m in Sources */,
+				DC6FF1391A86105400223D36 /* SharedCalculatorController.m in Sources */,
 				DC7C4B1A1A7770FD000E81B6 /* main.m in Sources */,
 				DC7C4B431A7B7BAF000E81B6 /* TimeCalculator.m in Sources */,
 				DC6FF1321A80B3C100223D36 /* TimePassedViewController.m in Sources */,
