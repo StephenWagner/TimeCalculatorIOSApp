@@ -12,7 +12,6 @@
 
 @interface SharedCalculatorController()
 
-@property BOOL firstCAClick;
 @property (strong, nonatomic) NSString* textToDisplay;
 @property (weak, nonatomic) UILabel *calculatorDisplay;
 @property (strong, nonatomic) SWTime *timeArgument, *timeArg2;
@@ -23,7 +22,6 @@
 
 
 @implementation SharedCalculatorController
-
 
 
 - (instancetype)initWithLabel: (UILabel*) calcDisplay{
@@ -50,7 +48,6 @@
     
     return [self formatDisplay:toDisplay];
 }
-
 
 - (NSString*)clear {
     
@@ -128,6 +125,25 @@
     [formattedString insertString:@":" atIndex: formattedString.length-2];
     [formattedString insertString:@":" atIndex:formattedString.length-5];
     return formattedString;
+}
+
+-(NSString*) listOfCalculations: (UIButton*)sender currentListOfCalculations:(NSString*)currentList timeBeingAdded:(NSString*) timeBeingAdded{
+
+    NSMutableString *timesInCalculationString = [[NSMutableString alloc]initWithString:currentList];
+
+    if (sender.tag > 7) {
+        [timesInCalculationString appendString:sender.currentTitle];
+        [timesInCalculationString appendString:timeBeingAdded];
+    }else{
+        [timesInCalculationString appendString:timeBeingAdded];
+        [timesInCalculationString appendString:sender.currentTitle];
+    }
+    
+    if ([sender.currentTitle isEqualToString:@"="]) {
+        [timesInCalculationString appendString:[_totalTime toString]];
+    }
+
+    return timesInCalculationString;
 }
 
 @end

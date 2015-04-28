@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeElapsedLabel;
 @property (weak, nonatomic) SharedCalculatorController *calcController;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
+@property (strong, nonatomic) NSMutableString *moreTimeCalculations;
 
 @end

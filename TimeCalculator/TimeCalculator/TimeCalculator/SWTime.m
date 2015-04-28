@@ -54,9 +54,9 @@
 }
 
 - (NSString*)toString{
-    NSString *hours = [NSString stringWithFormat:@"%02d", self.hour];
-    NSString *minutes = [NSString stringWithFormat:@"%02d", self.min];
-    NSString *seconds = [NSString stringWithFormat:@"%02d", self.sec];
+    NSString *hours = [NSString stringWithFormat:@"%02ld", (long)self.hour];
+    NSString *minutes = [NSString stringWithFormat:@"%02ld", (long)self.min];
+    NSString *seconds = [NSString stringWithFormat:@"%02ld", (long)self.sec];
     
     NSMutableString *result = [[NSMutableString alloc]initWithString:hours];
     

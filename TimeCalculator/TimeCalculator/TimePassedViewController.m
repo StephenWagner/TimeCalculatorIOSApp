@@ -40,10 +40,16 @@
 }
 
 - (IBAction)done:(UIButton *)sender {
-    
+    _calcController.listOfTimes = _moreTimeCalculations;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)doMath:(UIButton *)sender {
+    if (!_moreTimeCalculations) {
+        _moreTimeCalculations = [[NSMutableString alloc]initWithString:@""];
+    }
+    
+    [_moreTimeCalculations appendString:[_calcController listOfCalculations:sender currentListOfCalculations:_moreTimeCalculations timeBeingAdded:_timeElapsedLabel.text]];
+    
     _totalTimeLabel.text = [_calcController doMath:sender stringSWTime:_timeElapsedLabel.text];
 }
 
@@ -61,12 +67,11 @@
 
 - (void) updateTextField:(UIDatePicker*)sender{
 
-    UIDatePicker *picker = sender;
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat: @"hh:mm:ss a, MM/dd/yy"];
+    [formatter setDateFormat: @"hh:mm:00 a, MM/dd/yy"];
     NSString *timeFormatted = [[NSString alloc]init];
 
-    timeFormatted = [NSString stringWithFormat:@"%@", [formatter stringFromDate:picker.date]];
+    timeFormatted = [NSString stringWithFormat:@"%@", [formatter stringFromDate:sender.date]];
     
     if (sender == _datePickerStart) {
         _startTimeTextField.text = timeFormatted;
@@ -77,7 +82,7 @@
     NSTimeInterval interval = [_datePickerEnd.date timeIntervalSinceDate:_datePickerStart.date];
     
     
-    SWTime *timePassed = [[SWTime alloc]initUsingTotalTimeInSeconds: (NSInteger)interval];
+    SWTime *timePassed = [[SWTime alloc]initUsingTotalTimeInSeconds: (NSInteger)interval-(NSInteger)interval%60];
     _timeElapsedLabel.text = [timePassed toString];
 }
 

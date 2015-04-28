@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *calculatorDisplay;
 @property (strong, nonatomic) SharedCalculatorController *calcController;
+@property (nonatomic) BOOL totalBeingDisplayed;
 
 @end
 
@@ -26,6 +27,8 @@
 
     // Do any additional setup after loading the view, typically from a nib.
     _calcController = [[SharedCalculatorController alloc]initWithLabel:_calculatorDisplay];
+    _adBanner.delegate = self;
+    self.totalBeingDisplayed = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,19 +38,36 @@
 
 - (IBAction)appendDigit:(UIButton *)sender {
     
-    if ([_calculatorDisplay.text isEqualToString:[_calcController.totalTime toString]]) {
+    if (self.totalBeingDisplayed) {
         _calculatorDisplay.text = [_calcController clearDisplay];
+        _totalBeingDisplayed = NO;
     }
-
-    _calculatorDisplay.text = [_calcController appendDigit:sender];
+    
+    
+    if (_calculatorDisplay.text.length > 10) {
+        //do nothing (if the length of the display is getting too big
+    }else{
+        _calculatorDisplay.text = [_calcController appendDigit:sender];
+    }
+    
 }
 
 - (IBAction)doMath:(UIButton *)sender {
+
+    NSString *displayBeforeCalculation = [[NSString alloc]initWithString:_calculatorDisplay.text];
     _calculatorDisplay.text = [_calcController doMath:sender stringSWTime:_calculatorDisplay.text];
+    _timesInCalulationLabel.text = [_calcController listOfCalculations:sender currentListOfCalculations:_timesInCalulationLabel.text timeBeingAdded:displayBeforeCalculation];
+    
+    self.totalBeingDisplayed = YES;
+    
 }
 
 - (IBAction)clear {
+    if (!_calcController.firstCAClick) {
+        _timesInCalulationLabel.text = @"";
+    }
     _calculatorDisplay.text = [_calcController clear];
+    self.totalBeingDisplayed = NO;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -60,20 +80,31 @@
 - (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue{
     _calculatorDisplay.text = [_calcController.totalTime toString];
     
+    if (!_calcController.totalTime) {
+        _calculatorDisplay.text = [_calcController clearDisplay];
+    }
+    
     if (_calcController.buttonWithBorder.tag > 7) {
-        UIButton *buttonToBorder;
-        
-        switch (_calcController.buttonWithBorder.tag) {
-            case 8:
-                buttonToBorder = _plusButton;
-                break;
-            default:
-                buttonToBorder = _minusButton;
-                break;
-        }
-        
-        [_calcController setButtonBorder:buttonToBorder];
+        [_calcController setOperatorFromUIButton:_equalButton];
+        [_calcController setButtonBorder:_equalButton];
+        _timesInCalulationLabel.text = [_calcController listOfCalculations:_equalButton currentListOfCalculations:_timesInCalulationLabel.text timeBeingAdded:_calcController.listOfTimes];
+        self.totalBeingDisplayed = YES;
     }
 }
+
+#pragma mark - ADBannerView Delegate
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    
+    NSLog(@"bannerViewDidLoadAd");
+    if (banner.hidden) {
+        banner.hidden = NO;
+    }
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    NSLog(@"didFailtoReceiveAdWithError, error: %@", error);
+    banner.hidden = YES;
+}
+
 
 @end

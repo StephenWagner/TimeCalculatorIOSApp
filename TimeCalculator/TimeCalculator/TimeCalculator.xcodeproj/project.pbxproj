@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC481E731A902F8100E19AE0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC481E721A902F8100E19AE0 /* iAd.framework */; };
 		DC6FF1321A80B3C100223D36 /* TimePassedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6FF1301A80B3C100223D36 /* TimePassedViewController.m */; };
 		DC6FF1391A86105400223D36 /* SharedCalculatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6FF1381A86105400223D36 /* SharedCalculatorController.m */; };
 		DC7C4B1A1A7770FD000E81B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C4B191A7770FD000E81B6 /* main.m */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC481E721A902F8100E19AE0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		DC6FF12F1A80B3C100223D36 /* TimePassedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimePassedViewController.h; path = ../TimePassedViewController.h; sourceTree = "<group>"; };
 		DC6FF1301A80B3C100223D36 /* TimePassedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimePassedViewController.m; path = ../TimePassedViewController.m; sourceTree = "<group>"; };
 		DC6FF1371A86105400223D36 /* SharedCalculatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedCalculatorController.h; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC481E731A902F8100E19AE0 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +78,7 @@
 		DC7C4B0B1A7770FD000E81B6 = {
 			isa = PBXGroup;
 			children = (
+				DC481E721A902F8100E19AE0 /* iAd.framework */,
 				DC7C4B161A7770FD000E81B6 /* TimeCalculator */,
 				DC7C4B301A7770FD000E81B6 /* TimeCalculatorTests */,
 				DC7C4B151A7770FD000E81B6 /* Products */,
